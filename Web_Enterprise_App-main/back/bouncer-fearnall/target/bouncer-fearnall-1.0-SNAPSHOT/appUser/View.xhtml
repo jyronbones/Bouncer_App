@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewAppUserTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewAppUserLabel_id}"/>
+                    <h:outputText value="#{appUserController.selected.id}" title="#{bundle.ViewAppUserTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewAppUserLabel_userid}"/>
+                    <h:outputText value="#{appUserController.selected.userid}" title="#{bundle.ViewAppUserTitle_userid}"/>
+                    <h:outputText value="#{bundle.ViewAppUserLabel_password}"/>
+                    <h:outputText value="#{appUserController.selected.password}" title="#{bundle.ViewAppUserTitle_password}"/>
+                    <h:outputText value="#{bundle.ViewAppUserLabel_groupname}"/>
+                    <h:outputText value="#{appUserController.selected.groupname}" title="#{bundle.ViewAppUserTitle_groupname}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{appUserController.destroyAndView}" value="#{bundle.ViewAppUserDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewAppUserEditLink}"/>
+                <br />
+                <h:commandLink action="#{appUserController.prepareCreate}" value="#{bundle.ViewAppUserCreateLink}" />
+                <br />
+                <h:commandLink action="#{appUserController.prepareList}" value="#{bundle.ViewAppUserShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewAppUserIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditBouncerTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditBouncerLabel_x}" for="x" />
+                    <h:inputText id="x" value="#{bouncerController.selected.x}" title="#{bundle.EditBouncerTitle_x}" required="true"/>
+                    <h:outputLabel value="#{bundle.EditBouncerLabel_y}" for="y" />
+                    <h:inputText id="y" value="#{bouncerController.selected.y}" title="#{bundle.EditBouncerTitle_y}" required="true"/>
+                    <h:outputLabel value="#{bundle.EditBouncerLabel_YVelocity}" for="YVelocity" />
+                    <h:inputText id="YVelocity" value="#{bouncerController.selected.YVelocity}" title="#{bundle.EditBouncerTitle_YVelocity}" required="true"/>
+                </h:panelGrid>
+                <h:commandLink action="#{bouncerController.update}" value="#{bundle.EditBouncerSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditBouncerViewLink}"/>
+                <br />
+                <h:commandLink action="#{bouncerController.prepareList}" value="#{bundle.EditBouncerShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditBouncerIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
