@@ -1,0 +1,35 @@
+.bouncer-details-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px;
+}
+
+.bouncer-details-form label {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.bouncer-details-form input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.bouncer-details-form button {
+  padding: 10px 15px;
+  margin-top: 20px;
+  align-self: center;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.bouncer-details-form button:hover {
+  background-color: #0056b3;
+}

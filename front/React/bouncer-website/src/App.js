@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import BouncerList from "./components/BouncerList";
 import BouncerDetails from "./components/BouncerDetails";
 import CanvasComponent from "./components/CanvasComponent";
-import BouncerInfoTable from "./components/BouncerInfoTable";
 import { getBouncers } from "./services/BouncerService";
 import "./App.css";
 
