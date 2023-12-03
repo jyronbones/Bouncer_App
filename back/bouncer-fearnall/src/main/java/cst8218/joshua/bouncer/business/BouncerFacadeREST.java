@@ -220,7 +220,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Bouncer> findAll() {
         return super.findAll();
     }
