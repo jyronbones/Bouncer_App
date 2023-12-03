@@ -50,3 +50,18 @@ export const updateBouncer = async (id, bouncerData) => {
     throw error;
   }
 };
+
+export const deleteBouncer = async (id) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return await response.json(); // Or handle this as appropriate for your backend's response
+  } catch (error) {
+    console.error("Error deleting bouncer:", error);
+    throw error;
+  }
+};

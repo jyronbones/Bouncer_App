@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { updateBouncer } from "../services/BouncerService";
 
-const BouncerDetails = ({ bouncer }) => {
-  const [details, setDetails] = useState(bouncer);
+const BouncerDetails = ({ bouncer, onSubmit }) => {
+  const [details, setDetails] = useState({ ...bouncer });
   const [updateStatus, setUpdateStatus] = useState("");
+
+  useEffect(() => {
+    setDetails({ ...bouncer });
+  }, [bouncer]);
 
   const handleChange = (event) => {
     setDetails({
@@ -12,47 +16,51 @@ const BouncerDetails = ({ bouncer }) => {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     try {
-      await updateBouncer(details.id, details);
+      onSubmit(details);
       setUpdateStatus("Update successful!");
     } catch (error) {
-      setUpdateStatus(`Error updating bouncer: ${error.message}`);
+      setUpdateStatus(`Error: ${error.message}`);
     }
   };
 
   return (
-    <div>
-      <h2>Edit Bouncer</h2>
-      <label>
-        X Position:
-        <input
-          type="number"
-          name="x"
-          value={details.x || ""}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Y Position:
-        <input
-          type="number"
-          name="y"
-          value={details.y || ""}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Y Velocity:
-        <input
-          type="number"
-          name="yVelocity"
-          value={details.yVelocity || ""}
-          onChange={handleChange}
-        />
-      </label>
-      <button onClick={handleSubmit}>Update</button>
-      <div>{updateStatus}</div>
+    <div className="overlay">
+      <div className="overlay-content">
+        <h2>{bouncer.id ? "Edit Bouncer" : "Create New Bouncer"}</h2>
+        <label>
+          X Position:
+          <input
+            type="number"
+            name="x"
+            value={details.x || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Y Position:
+          <input
+            type="number"
+            name="y"
+            value={details.y || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Y Velocity:
+          <input
+            type="number"
+            name="yVelocity"
+            value={details.yVelocity || ""}
+            onChange={handleChange}
+          />
+        </label>
+        <button onClick={handleSubmit}>
+          {bouncer.id ? "Update" : "Create"}
+        </button>
+        <div>{updateStatus}</div>
+      </div>
     </div>
   );
 };

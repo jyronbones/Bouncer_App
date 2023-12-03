@@ -29,7 +29,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <BouncerInfoTable bouncers={bouncers} />
         <BouncerList bouncers={bouncers} onBouncerSelect={setSelectedBouncer} />
         <CanvasComponent bouncers={bouncers} />
         {selectedBouncer && <BouncerDetails bouncer={selectedBouncer} />}
