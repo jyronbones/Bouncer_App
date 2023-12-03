@@ -23,14 +23,12 @@ export const createBouncer = async (bouncerData) => {
       body: JSON.stringify(bouncerData),
     });
 
-    // Check if the response status is 'ok' (status code in the range 200-299)
     if (!response.ok) {
       throw new Error(
         `Network response was not ok, status: ${response.status}`
       );
     }
 
-    // Check for the content type of the response
     const contentType = response.headers.get("content-type");
     if (!contentType || !contentType.includes("application/json")) {
       throw new TypeError("Received non-JSON response from server");
@@ -39,7 +37,7 @@ export const createBouncer = async (bouncerData) => {
     return await response.json();
   } catch (error) {
     console.error("Error creating bouncer:", error);
-    throw error; // Rethrow the error for further handling if necessary
+    throw error;
   }
 };
 
@@ -74,12 +72,10 @@ export const deleteBouncer = async (id) => {
       );
     }
 
-    // Check if the response has content
     const contentType = response.headers.get("content-type");
     if (contentType && contentType.includes("application/json")) {
       return await response.json();
     } else {
-      // If no content, return a success message or empty object
       return { message: "Bouncer successfully deleted" };
     }
   } catch (error) {

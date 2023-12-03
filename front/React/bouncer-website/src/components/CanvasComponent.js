@@ -6,6 +6,8 @@ const CanvasComponent = ({ bouncers }) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
+    const backgroundImage = new Image();
+    backgroundImage.src = "/images/space.png";
 
     let animationFrameId;
 
@@ -20,17 +22,18 @@ const CanvasComponent = ({ bouncers }) => {
       context.fillStyle = "blue";
       context.font = "bold 14px Arial";
       context.textAlign = "center";
-
       context.fillText(bouncer.id, bouncer.x, bouncer.y + 5);
     };
 
     const render = () => {
-      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
       bouncers.forEach(drawBouncer);
       animationFrameId = window.requestAnimationFrame(render);
     };
 
-    render();
+    backgroundImage.onload = () => {
+      render();
+    };
 
     return () => {
       window.cancelAnimationFrame(animationFrameId);
@@ -42,7 +45,8 @@ const CanvasComponent = ({ bouncers }) => {
       ref={canvasRef}
       width={800}
       height={600}
-      style={{ border: "1px solid #000", background: "rgba(0, 0, 0, 0.1)" }}
+      style={{ border: "1px solid #000" }}
+      className="bouncer-canvas"
     />
   );
 };
