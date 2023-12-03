@@ -18,17 +18,20 @@ const BouncerList = () => {
   const [formError, setFormError] = useState("");
 
   useEffect(() => {
-    fetchBouncers();
-  }, []);
+    const fetchBouncers = async () => {
+      try {
+        const data = await getBouncers();
+        setBouncers(data);
+      } catch (error) {
+        console.error("Error fetching bouncers:", error);
+      }
+    };
 
-  const fetchBouncers = async () => {
-    try {
-      const data = await getBouncers();
-      setBouncers(data);
-    } catch (error) {
-      console.error("Error fetching bouncers:", error);
-    }
-  };
+    fetchBouncers();
+    const interval = setInterval(fetchBouncers, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleCreate = () => {
     setSelectedBouncer({ x: 0, y: 0, YVelocity: 0 });
@@ -48,7 +51,6 @@ const BouncerList = () => {
     if (window.confirm("Are you sure you want to delete this bouncer?")) {
       try {
         await deleteBouncer(id);
-        await fetchBouncers();
       } catch (error) {
         console.error("Error deleting bouncer:", error);
         setFormError(`Error deleting bouncer.`);
@@ -65,7 +67,6 @@ const BouncerList = () => {
         await updateBouncer(bouncerData.id, bouncerData);
         setShowUpdateForm(false);
       }
-      await fetchBouncers();
       setFormError("");
     } catch (error) {
       setFormError(`Error ${isCreate ? "creating" : "updating"} bouncer.`);
