@@ -19,7 +19,7 @@ const BouncerInfoTable = ({ bouncers }) => {
               <td>{bouncer.id}</td>
               <td>{bouncer.x}</td>
               <td>{bouncer.y}</td>
-              <td>{bouncer.yVelocity || "N/A"}</td>
+              <td>{bouncer.YVelocity || "N/A"}</td>
             </tr>
           ))}
         </tbody>
