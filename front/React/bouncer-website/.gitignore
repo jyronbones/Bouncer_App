@@ -1,3 +1,6 @@
+# Maven build directory
+back/bouncer-fearnall/target/
+
 # Node.js
 node_modules/
 npm-debug.log
