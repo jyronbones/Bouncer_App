@@ -8,6 +8,8 @@ package cst8218.joshua.bouncer.business;
 import cst8218.joshua.bouncer.business.AbstractFacade;
 import cst8218.joshua.bouncer.entity.Bouncer;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,6 +32,7 @@ import javax.ws.rs.core.Response;
  */
 @Stateless
 @Path("bouncer")
+@DeclareRoles({"Admin", "ApiGroup"}) // Specifies security roles: Admin, ApiGroup
 public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
 
     @PersistenceContext(unitName = "my_persistence_unit")
@@ -48,6 +51,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
      */
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @RolesAllowed({"Admin", "ApiGroup"}) // Specifies security roles: Admin, ApiGroup
     public Response createBouncer(Bouncer entity) {
         // for a non-null ID
         if (entity.getId() != null) {
@@ -88,6 +92,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @POST
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Response edit(@PathParam("id") Long id, Bouncer entity) {
         // if the ID doesn't exist
         Bouncer oldBouncer = super.find(id);
@@ -137,6 +142,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Response replace(@PathParam("id") Long id, Bouncer entity) {
         // if the ID doesn't exist
         Bouncer oldBouncer = super.find(id);
@@ -194,6 +200,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
      */
     @DELETE
     @Path("{id}")
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Response remove(@PathParam("id") Long id) {
         Bouncer bouncer = super.find(id);
         
@@ -214,6 +221,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Bouncer find(@PathParam("id") Long id) {
         return super.find(id);
     }
@@ -221,6 +229,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @RolesAllowed({"Admin", "ApiGroup"})
     public List<Bouncer> findAll() {
         return super.findAll();
     }
@@ -228,6 +237,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @RolesAllowed({"Admin", "ApiGroup"})
     public List<Bouncer> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
@@ -240,6 +250,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Response countREST() {
         return Response
                 .ok(String.valueOf(super.count()))

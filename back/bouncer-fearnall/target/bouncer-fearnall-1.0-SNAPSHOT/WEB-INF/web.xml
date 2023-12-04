@@ -21,4 +21,45 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    
+    <!-- Admin Role Authorization-->
+    <security-constraint>
+        <display-name>JSF Pages Login</display-name>
+        <web-resource-collection>
+            <web-resource-name>JSF Pages</web-resource-name>
+            <url-pattern>/faces/bouncer/*</url-pattern>
+            <url-pattern>/faces/appUser/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>Admin Role Required</description>
+            <role-name>Admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <security-constraint>
+        <display-name>RESTful Resources Login</display-name>
+        <web-resource-collection>
+            <web-resource-name>RESTful Resources</web-resource-name>
+            <url-pattern>/BouncerFacadeRest/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>ApiGroup or Admin Role Required</description>
+            <role-name>ApiGroup</role-name>
+            <role-name>Admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <!-- PagesGroup role to access Bouncer folder-->
+    <security-constraint>
+        <display-name>JSF Bouncer Pages Login</display-name>
+        <web-resource-collection>
+            <web-resource-name>JSF Bouncer Pages</web-resource-name>
+            <url-pattern>/faces/bouncer/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>PagesGroup Role Required</description>
+            <role-name>PagesGroup</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
 </web-app>
