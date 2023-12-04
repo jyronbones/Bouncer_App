@@ -87,7 +87,7 @@ public class BouncerInteractionApp extends JFrame {
 
     private void displayBouncers() {
         try {
-            URL url = new URL("http://localhost:8080/bouncer-wray/resources/cst8218.wray.bouncer.entity.bouncer/");
+            URL url = new URL("http://localhost:8080/bouncer-fearnall/resources/bouncer/");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
@@ -117,7 +117,7 @@ public class BouncerInteractionApp extends JFrame {
                     String id = bouncerElement.getElementsByTagName("id").item(0).getTextContent();
                     String x = bouncerElement.getElementsByTagName("x").item(0).getTextContent();
                     String y = bouncerElement.getElementsByTagName("y").item(0).getTextContent();
-                    String yVelocity = bouncerElement.getElementsByTagName("yVelocity").item(0).getTextContent();
+                    String yVelocity = bouncerElement.getElementsByTagName("YVelocity").item(0).getTextContent(); 
 
                     model.addRow(new Object[]{id, x, y, yVelocity});
                 }
@@ -143,7 +143,7 @@ public class BouncerInteractionApp extends JFrame {
                 String newYVelocityValue = validateInput("Enter new Y Velocity value:", "Y Velocity");
 
                 if (newXValue != null && newYValue != null && newYVelocityValue != null) {
-                    URL url = new URL("http://localhost:8080/bouncer-wray/resources/cst8218.wray.bouncer.entity.bouncer/" + selectedBouncerId); // MY ENDPOINT, REPLACE WHEN TESTING WITH YOURS
+                    URL url = new URL("http://localhost:8080/bouncer-fearnall/resources/bouncer/" + selectedBouncerId);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("PUT");
                     conn.setRequestProperty("Content-Type", "application/json");
