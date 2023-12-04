@@ -5,21 +5,36 @@ import java.io.*;
 import java.net.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.Utilities;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXParseException;
+import org.xml.sax.SAXException;
 
+/**
+ * A class that contains all necessary components for running a swing app that
+ * displays all bouncers in a local database. App can also update bouncer values
+ * then refresh the displayed list to reflect those changes.
+ *
+ * @author Sean Wray
+ */
 public class BouncerInteractionApp extends JFrame {
 
-    private JTable bouncersTable;
-    private JTextArea bouncersTextArea;
-    private JButton updateButton;
-    private JButton refreshButton;
-    private int selectedBouncerId = -1;
+    private JTable bouncersTable;             //used to display all bouncers in database  
+    private final JButton updateButton;       //update a selected bouncer
+    private final JButton refreshButton;      //refreshes bouncer list
+    private int selectedBouncerId = -1;       //user selected bouncer ID
+    private final int maxY = 600;             // max Y value for a bouncer location
+    private final int minY = 0;               // min Y value for a bouncer location
+    private final int maxX = 800;             // max X value for a bouncer location
+    private final int minX = 0;               // min X value for a bouncer location
+    private final String urlString = "http://localhost:8080/bouncer-fearnall/resources/bouncer/"; //url string used for GET and PUT requests on bouncers
 
+    /**
+     * Constructor for setting up jframe,UI components listeners, and calling
+     * the displaybouncer() function upon app startup
+     */
     public BouncerInteractionApp() {
         setTitle("CST8218 Java Swing Bouncers A2");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,7 +47,7 @@ public class BouncerInteractionApp extends JFrame {
         UIManager.put("Button.foreground", Color.WHITE);
         UIManager.put("Table.background", Color.BLACK);
         UIManager.put("Table.foreground", Color.WHITE);
- UIManager.put("OptionPane.messageForeground", Color.WHITE);
+        UIManager.put("OptionPane.messageForeground", Color.WHITE);
         JPanel panel = new JPanel(new BorderLayout());
 
         JLabel titleLabel = new JLabel("BOUNCER INFO");
@@ -41,6 +56,7 @@ public class BouncerInteractionApp extends JFrame {
         titleLabel.setForeground(Color.WHITE);
         panel.add(titleLabel, BorderLayout.NORTH);
 
+        //Table for displaying bouncers and their attributes
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
         model.addColumn("X");
@@ -48,7 +64,7 @@ public class BouncerInteractionApp extends JFrame {
         model.addColumn("Velocity");
 
         bouncersTable = new JTable(model);
-        bouncersTable.setBackground(Color.BLACK); 
+        bouncersTable.setBackground(Color.BLACK);
         bouncersTable.setForeground(Color.WHITE);
         JScrollPane scrollPane = new JScrollPane(bouncersTable);
 
@@ -85,20 +101,26 @@ public class BouncerInteractionApp extends JFrame {
         displayBouncers();
     }
 
+    /**
+     * Function for displaying all bouncers. Uses a simple GET request to
+     * retrieve all bouncer entities in a json file. A DocumentBuilder parses
+     * the json and converts to a readable string format. Attributes are then
+     * parsed as well and added to the table row by row.
+     */
     private void displayBouncers() {
         try {
-            URL url = new URL("http://localhost:8080/bouncer-fearnall/resources/bouncer/");
+            URL url = new URL(urlString);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            StringBuilder response = new StringBuilder();
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
+            StringBuilder response;
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
             }
-            reader.close();
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -117,24 +139,22 @@ public class BouncerInteractionApp extends JFrame {
                     String id = bouncerElement.getElementsByTagName("id").item(0).getTextContent();
                     String x = bouncerElement.getElementsByTagName("x").item(0).getTextContent();
                     String y = bouncerElement.getElementsByTagName("y").item(0).getTextContent();
-                    String yVelocity = bouncerElement.getElementsByTagName("YVelocity").item(0).getTextContent(); 
+                    String yVelocity = bouncerElement.getElementsByTagName("YVelocity").item(0).getTextContent();
 
                     model.addRow(new Object[]{id, x, y, yVelocity});
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException | ParserConfigurationException | DOMException | SAXException e) {
         }
     }
 
-    private String getElementValue(Element parentElement, String elementName) {
-        Node node = parentElement.getElementsByTagName(elementName).item(0);
-        if (node != null) {
-            return node.getTextContent();
-        }
-        return "";
-    }
-
+    /**
+     * Update a selected bouncer that has been clicked on by the user. This will
+     * prompt 3 pop-up windows were a user can enter in a new X, Y and yVelocity
+     * value for the bouncer. These are then converted to json and sent to the
+     * bouncer app in the form of a PUT request. A validate function is called
+     * on each entry to ensure it is an integer and in a valid range.
+     */
     private void updateSelectedBouncer() {
         if (selectedBouncerId != -1) {
             try {
@@ -143,12 +163,11 @@ public class BouncerInteractionApp extends JFrame {
                 String newYVelocityValue = validateInput("Enter new Y Velocity value:", "Y Velocity");
 
                 if (newXValue != null && newYValue != null && newYVelocityValue != null) {
-                    URL url = new URL("http://localhost:8080/bouncer-fearnall/resources/bouncer/" + selectedBouncerId);
+                    URL url = new URL(urlString + selectedBouncerId);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("PUT");
                     conn.setRequestProperty("Content-Type", "application/json");
                     conn.setDoOutput(true);
-
                     String jsonInputString = "{\"id\": \"" + selectedBouncerId + "\", \"x\": \"" + newXValue + "\", \"y\": \"" + newYValue + "\", \"YVelocity\": \"" + newYVelocityValue + "\"}";
 
                     try (OutputStream os = conn.getOutputStream()) {
@@ -156,42 +175,39 @@ public class BouncerInteractionApp extends JFrame {
                         os.write(input, 0, input.length);
                     }
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder response = new StringBuilder();
-                    String line;
+                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                        StringBuilder response = new StringBuilder();
+                        String line;
 
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
+                        while ((line = reader.readLine()) != null) {
+                            response.append(line);
+                        }
                     }
-                    reader.close();
-
-                    // JOptionPane.showMessageDialog(this, "Attributes updated: " + response.toString());
                     JOptionPane.showMessageDialog(this, "BOUNCER " + selectedBouncerId + " UPDATED!");
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (HeadlessException | IOException e) {
             }
         } else {
             JOptionPane.showMessageDialog(this, "Please select a bouncer first.");
         }
     }
 
+    /**
+     * Function to refresh bouncer info, for example after an update
+     */
     private void refreshBouncers() {
         displayBouncers();
     }
 
-    private int extractBouncerId(String line) {
-        int startIndex = line.indexOf("Bouncer ID: ") + 12;
-        int endIndex = line.indexOf(",", startIndex);
-        String idStr = line.substring(startIndex, endIndex);
-        return Integer.parseInt(idStr.trim());
-    }
-
-    private void highlightSelectedBouncer(int start, int end) {
-        bouncersTextArea.requestFocusInWindow();
-        bouncersTextArea.select(start, end);
-    }
-
+    /**
+     * Simple validation function that checks if the values being entered for
+     * bouncer attributes are integers. Also, in the case of X and Y values,
+     * that they fall within the valid range.
+     *
+     * @param message value entered by user for attribute
+     * @param attribute attribute being modified, either X,Y or yVelocity
+     * @return input returns the value the user entered if it is valid
+     */
     private String validateInput(String message, String attribute) {
         String input;
         boolean validInput = false;
@@ -201,20 +217,26 @@ public class BouncerInteractionApp extends JFrame {
             if (input != null) {
                 try {
                     int value = Integer.parseInt(input);
-                    if (attribute.equals("X")) {
-                        if (value >= 0 && value <= 800) {
+                    switch (attribute) {
+                        case "X":
+                            if (value >= minX && value <= maxX) {
+                                validInput = true;
+                            } else {
+                                JOptionPane.showMessageDialog(this, "X value must be between 0 and 800.");
+                            }
+                            break;
+                        case "Y":
+                            if (value >= minY && value <= maxY) {
+                                validInput = true;
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Y value must be between 0 and 600.");
+                            }
+                            break;
+                        case "Y Velocity":
                             validInput = true;
-                        } else {
-                            JOptionPane.showMessageDialog(this, "X value must be between 0 and 800.");
-                        }
-                    } else if (attribute.equals("Y")) {
-                        if (value >= 0 && value <= 600) {
-                            validInput = true;
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Y value must be between 0 and 600.");
-                        }
-                    } else if (attribute.equals("Y Velocity")) {
-                        validInput = true;
+                            break;
+                        default:
+                            break;
                     }
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(this, "Invalid input. Please enter a valid integer number.");
@@ -227,6 +249,11 @@ public class BouncerInteractionApp extends JFrame {
         return input;
     }
 
+    /**
+     * main method that starts the application and sets the app to visible
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             BouncerInteractionApp app = new BouncerInteractionApp();
