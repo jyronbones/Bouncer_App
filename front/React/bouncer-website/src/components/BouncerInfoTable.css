@@ -67,3 +67,27 @@
   background-color: #0056b3;
   transform: scale(1.05);
 }
+
+@media (prefers-color-scheme: dark) {
+  .bouncer-info-container {
+    color: #f8f9fa;
+  }
+
+  .bouncer-info-table {
+    color: #f8f9fa;
+  }
+
+  .bouncer-info-table th,
+  .bouncer-info-table td {
+    border-bottom: 1px solid #495057;
+  }
+
+  .bouncer-info-table th {
+    background-color: #343a40;
+    color: #f8f9fa;
+  }
+
+  .bouncer-info-table tr:hover {
+    background-color: #495057;
+  }
+}

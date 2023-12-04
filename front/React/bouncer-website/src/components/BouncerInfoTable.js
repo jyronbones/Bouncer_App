@@ -12,7 +12,7 @@ const BouncerInfoTable = ({ bouncers, onCreate, onUpdate, onDelete }) => {
             <th>X Position</th>
             <th>Y Position</th>
             <th>Y Velocity</th>
-            <th>Actions</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

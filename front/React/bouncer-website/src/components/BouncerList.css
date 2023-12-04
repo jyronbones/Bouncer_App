@@ -12,7 +12,8 @@
 }
 
 .modal-content {
-  background-color: #fff;
+  background-color: #f8f9fa;
+  color: #343a40;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -61,10 +62,12 @@
   font-weight: bold;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
+  color: #343a40;
 }
 
 .bouncer-details-form input {
-  width: 100%;
+  background-color: #ffffff;
+  color: #495057;
   padding: 8px;
   margin-bottom: 1rem;
   border: 1px solid #ced4da;
@@ -72,17 +75,48 @@
 }
 
 .bouncer-details-form button {
+  background-color: #28a745;
+  color: white;
   padding: 10px 15px;
   margin-top: 20px;
   width: auto;
   align-self: center;
   border-radius: 4px;
-  background-color: #007bff;
-  color: white;
   border: none;
   cursor: pointer;
 }
 
 .bouncer-details-form button:hover {
-  background-color: #0056b3;
+  background-color: #218838;
+}
+
+@media (prefers-color-scheme: dark) {
+  .modal-content {
+    background-color: #343a40;
+    color: #f8f9fa;
+  }
+
+  .bouncer-details-form {
+    background-color: #343a40;
+    color: #f8f9fa;
+  }
+
+  .bouncer-details-form label {
+    color: #f8f9fa;
+  }
+
+  .bouncer-details-form input {
+    background-color: #495057;
+    color: #f8f9fa;
+    border: 1px solid #6c757d;
+  }
+
+  .bouncer-details-form button {
+    background-color: #17a2b8;
+    color: white;
+  }
+
+  .bouncer-details-form button:hover {
+    background-color: #138496;
+  }
 }

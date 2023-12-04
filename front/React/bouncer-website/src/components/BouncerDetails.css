@@ -3,11 +3,14 @@
   flex-direction: column;
   align-items: stretch;
   padding: 20px;
+  background-color: #f8f9fa;
+  color: #343a40;
 }
 
 .bouncer-details-form label {
   font-weight: bold;
   margin-top: 10px;
+  color: inherit;
 }
 
 .bouncer-details-form input {
@@ -17,6 +20,8 @@
   margin-bottom: 10px;
   border: 1px solid #ced4da;
   border-radius: 4px;
+  background-color: white;
+  color: #343a40;
 }
 
 .bouncer-details-form button {
@@ -32,4 +37,25 @@
 
 .bouncer-details-form button:hover {
   background-color: #0056b3;
+}
+
+@media (prefers-color-scheme: dark) {
+  .bouncer-details-form {
+    background-color: #343a40;
+    color: #f8f9fa;
+  }
+
+  .bouncer-details-form input {
+    border: 1px solid #495057;
+    background-color: #495057;
+    color: #f8f9fa;
+  }
+
+  .bouncer-details-form button {
+    background-color: #0069d9;
+  }
+
+  .bouncer-details-form button:hover {
+    background-color: #005cbf;
+  }
 }
