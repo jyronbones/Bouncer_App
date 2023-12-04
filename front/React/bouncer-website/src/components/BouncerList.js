@@ -10,13 +10,27 @@ import BouncerDetails from "./BouncerDetails";
 import "./BouncerList.css";
 import "./BouncerDetails.css";
 
+/**
+ * Component for managing a list of bouncers.
+ * Allows for creating, updating, and deleting bouncers.
+ */
 const BouncerList = () => {
+  // State for storing the list of bouncers
   const [bouncers, setBouncers] = useState([]);
+
+  // State for managing the selected bouncer
   const [selectedBouncer, setSelectedBouncer] = useState(null);
+
+  // State for showing or hiding the create form
   const [showCreateForm, setShowCreateForm] = useState(false);
+
+  // State for showing or hiding the update form
   const [showUpdateForm, setShowUpdateForm] = useState(false);
+
+  // State for storing form error messages
   const [formError, setFormError] = useState("");
 
+  // Effect to fetch bouncers from the server
   useEffect(() => {
     const fetchBouncers = async () => {
       try {
@@ -33,6 +47,7 @@ const BouncerList = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Handler for creating a new bouncer
   const handleCreate = () => {
     setSelectedBouncer({ x: 0, y: 0, YVelocity: 0 });
     setShowCreateForm(true);
@@ -40,6 +55,7 @@ const BouncerList = () => {
     setFormError("");
   };
 
+  // Handler for updating an existing bouncer
   const handleUpdate = (bouncer) => {
     setSelectedBouncer(bouncer);
     setShowUpdateForm(true);
@@ -47,6 +63,7 @@ const BouncerList = () => {
     setFormError("");
   };
 
+  // Handler for deleting a bouncer
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this bouncer?")) {
       try {
@@ -58,6 +75,7 @@ const BouncerList = () => {
     }
   };
 
+  // Handler for form submission (create or update)
   const handleSubmit = async (bouncerData, isCreate) => {
     try {
       if (isCreate) {

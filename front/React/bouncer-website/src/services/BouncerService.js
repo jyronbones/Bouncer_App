@@ -1,5 +1,11 @@
 const API_BASE_URL = "http://localhost:8080/bouncer-fearnall/resources/bouncer";
 
+/**
+ * Fetches and returns the list of all bouncers from the server.
+ *
+ * @returns {Promise<Array>} A promise that resolves to an array of bouncers.
+ * @throws Will throw an error if the network response is not ok.
+ */
 export const getBouncers = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}`);
@@ -13,6 +19,13 @@ export const getBouncers = async () => {
   }
 };
 
+/**
+ * Creates a new bouncer on the server.
+ *
+ * @param {Object} bouncerData The data of the bouncer to be created.
+ * @returns {Promise<Object>} A promise that resolves to the created bouncer object.
+ * @throws Will throw an error if the network response is not ok or non-JSON.
+ */
 export const createBouncer = async (bouncerData) => {
   try {
     const response = await fetch(`${API_BASE_URL}`, {
@@ -41,6 +54,14 @@ export const createBouncer = async (bouncerData) => {
   }
 };
 
+/**
+ * Updates an existing bouncer on the server.
+ *
+ * @param {number} id The ID of the bouncer to update.
+ * @param {Object} bouncerData The updated data for the bouncer.
+ * @returns {Promise<Object>} A promise that resolves to the updated bouncer object.
+ * @throws Will throw an error if the network response is not ok.
+ */
 export const updateBouncer = async (id, bouncerData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/${id}`, {
@@ -60,6 +81,13 @@ export const updateBouncer = async (id, bouncerData) => {
   }
 };
 
+/**
+ * Deletes a bouncer from the server.
+ *
+ * @param {number} id The ID of the bouncer to delete.
+ * @returns {Promise<Object>} A promise that resolves to a confirmation message.
+ * @throws Will throw an error if the network response is not ok.
+ */
 export const deleteBouncer = async (id) => {
   try {
     const response = await fetch(`${API_BASE_URL}/${id}`, {
