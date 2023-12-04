@@ -149,7 +149,7 @@ public class BouncerInteractionApp extends JFrame {
                     conn.setRequestProperty("Content-Type", "application/json");
                     conn.setDoOutput(true);
 
-                    String jsonInputString = "{\"id\": \"" + selectedBouncerId + "\", \"x\": \"" + newXValue + "\", \"y\": \"" + newYValue + "\", \"yVelocity\": \"" + newYVelocityValue + "\"}";
+                    String jsonInputString = "{\"id\": \"" + selectedBouncerId + "\", \"x\": \"" + newXValue + "\", \"y\": \"" + newYValue + "\", \"YVelocity\": \"" + newYVelocityValue + "\"}";
 
                     try (OutputStream os = conn.getOutputStream()) {
                         byte[] input = jsonInputString.getBytes("utf-8");
