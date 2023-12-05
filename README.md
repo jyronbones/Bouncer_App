@@ -1,5 +1,3 @@
-# Bouncer App README
-
 ## Overview
 Bouncer App is an advanced, multi-platform full-stack application designed for managing and animating "bouncer" objects. 
 <br><br>Featuring comprehensive tools including robust user authentication, extensive multilingual support, and a suite of interactive front-end interfaces in React, Java Swing, and Mobile. With a strong emphasis on both localization and rigorous testing, the Bouncer App ensures a seamless and user-friendly experience, catering to a global audience.
