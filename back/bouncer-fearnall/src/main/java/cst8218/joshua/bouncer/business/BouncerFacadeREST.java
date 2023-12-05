@@ -47,7 +47,8 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
      * @return Response containing new bouncer
      */
     @POST
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response createBouncer(Bouncer entity) {
         // for a non-null ID
         if (entity.getId() != null) {
@@ -87,7 +88,8 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
      */
     @POST
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id") Long id, Bouncer entity) {
         // if the ID doesn't exist
         Bouncer oldBouncer = super.find(id);
@@ -136,7 +138,8 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
      */
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response replace(@PathParam("id") Long id, Bouncer entity) {
         // if the ID doesn't exist
         Bouncer oldBouncer = super.find(id);
@@ -194,6 +197,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
      */
     @DELETE
     @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response remove(@PathParam("id") Long id) {
         Bouncer bouncer = super.find(id);
         
@@ -213,21 +217,21 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public Bouncer find(@PathParam("id") Long id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Bouncer> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Bouncer> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }

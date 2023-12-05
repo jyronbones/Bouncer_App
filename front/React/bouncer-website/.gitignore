@@ -1,0 +1,36 @@
+# Maven build directory
+back/bouncer-fearnall/target/
+
+# Node.js
+node_modules/
+npm-debug.log
+
+# Build files
+build/
+dist/
+
+# Dependencies installed via npm
+package-lock.json
+
+# Environment variables
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Editor-related files
+.vscode/
+.idea/
+
+# Mac specific files
+.DS_Store
+
+# Webpack cache
+.cache/
+
+# Jest cache
+.jest/
+
+# Log files
+*.log
+logs/
