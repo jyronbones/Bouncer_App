@@ -27,6 +27,12 @@ The `front` directory includes:
 3. Start the React app: `npm start`
 4. The application will launch in your default web browser at `http://localhost:3000`.
 
+### Preview
+![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/2da746d8-2fd3-4560-9098-105a5a52c61b)
+![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/4cb19370-a60e-4930-b4af-8e3f46fafddb)
+
+
+
 ### Java Swing Client (BouncerSwing Project)
 1. Open the `bouncerswing` project in a Java-supporting IDE, preferably NetBeans, as the backend was developed using this IDE. Alternative IDEs like IntelliJ IDEA or Eclipse can also be used.
 2. Ensure Java SDK is properly configured in the project settings.
