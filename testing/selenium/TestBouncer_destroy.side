@@ -1,0 +1,333 @@
+{
+  "id": "b0ff92bc-0e6b-4412-8106-9d5f3423a7aa",
+  "version": "2.0",
+  "name": "TestBouncer",
+  "url": "http://localhost:8080/bouncer-fearnall/",
+  "tests": [{
+    "id": "32fa8e73-f6cf-494d-99a0-f70de055938b",
+    "name": "testCreate",
+    "commands": [{
+      "id": "30ea135a-3b45-45ec-8c71-1da0018cb215",
+      "comment": "",
+      "command": "open",
+      "target": "/bouncer-fearnall/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "865d0ecd-d6bb-471e-889a-272342b528b5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1616x876",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6ac3dd99-2d42-4af1-aa50-cf3ae6ff60f7",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Show All Bouncer Items",
+      "targets": [
+        ["linkText=Show All Bouncer Items", "linkText"],
+        ["css=a", "css:finder"],
+        ["xpath=//a[contains(text(),'Show All Bouncer Items')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/bouncer-fearnall/faces/bouncer/List.xhtml;jsessionid=83038fbf4e74b2ed466fd71cf7fa')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Show All Bouncer Items')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "716a10b2-5639-4213-bffb-969901e458c1",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Create New Bouncer",
+      "targets": [
+        ["linkText=Create New Bouncer", "linkText"],
+        ["css=a:nth-child(5)", "css:finder"],
+        ["xpath=//a[contains(text(),'Create New Bouncer')]", "xpath:link"],
+        ["xpath=//a[@onclick=\"mojarra.jsfcljs(document.getElementById('j_idt11'),{'j_idt11:j_idt42':'j_idt11:j_idt42'},'');return false\"]", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt11']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Create New Bouncer')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6ab2b3c3-9c53-4a11-af19-c5607d32d3ba",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt12:x",
+      "targets": [
+        ["id=j_idt12:x", "id"],
+        ["name=j_idt12:x", "name"],
+        ["css=#j_idt12\\3Ax", "css:finder"],
+        ["xpath=//input[@id='j_idt12:x']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt12']/table/tbody/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "981ec0aa-069e-4c84-adc2-ad8f4a689b67",
+      "comment": "",
+      "command": "type",
+      "target": "id=j_idt12:x",
+      "targets": [
+        ["id=j_idt12:x", "id"],
+        ["name=j_idt12:x", "name"],
+        ["css=#j_idt12\\3Ax", "css:finder"],
+        ["xpath=//input[@id='j_idt12:x']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt12']/table/tbody/tr/td[2]/input", "xpath:idRelative"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": "300"
+    }, {
+      "id": "1e05f458-60df-447c-97d0-5aaba4a461bc",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt12:y",
+      "targets": [
+        ["id=j_idt12:y", "id"],
+        ["name=j_idt12:y", "name"],
+        ["css=#j_idt12\\3Ay", "css:finder"],
+        ["xpath=//input[@id='j_idt12:y']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt12']/table/tbody/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a6913523-dfd8-4ee9-bbdf-a34d753b3d97",
+      "comment": "",
+      "command": "type",
+      "target": "id=j_idt12:y",
+      "targets": [
+        ["id=j_idt12:y", "id"],
+        ["name=j_idt12:y", "name"],
+        ["css=#j_idt12\\3Ay", "css:finder"],
+        ["xpath=//input[@id='j_idt12:y']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt12']/table/tbody/tr[2]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[2]/input", "xpath:position"]
+      ],
+      "value": "400"
+    }, {
+      "id": "3fcb1465-3e9c-4dab-9859-a7c18946611c",
+      "comment": "",
+      "command": "click",
+      "target": "id=j_idt12:YVelocity",
+      "targets": [
+        ["id=j_idt12:YVelocity", "id"],
+        ["name=j_idt12:YVelocity", "name"],
+        ["css=#j_idt12\\3AYVelocity", "css:finder"],
+        ["xpath=//input[@id='j_idt12:YVelocity']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt12']/table/tbody/tr[3]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "555c21c8-72dc-4289-95cc-3edd08d625d6",
+      "comment": "",
+      "command": "type",
+      "target": "id=j_idt12:YVelocity",
+      "targets": [
+        ["id=j_idt12:YVelocity", "id"],
+        ["name=j_idt12:YVelocity", "name"],
+        ["css=#j_idt12\\3AYVelocity", "css:finder"],
+        ["xpath=//input[@id='j_idt12:YVelocity']", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt12']/table/tbody/tr[3]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[2]/input", "xpath:position"]
+      ],
+      "value": "120"
+    }, {
+      "id": "6b5e8fac-6ca6-4290-9975-14941d225cee",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Save",
+      "targets": [
+        ["linkText=Save", "linkText"],
+        ["css=a:nth-child(5)", "css:finder"],
+        ["xpath=//a[contains(text(),'Save')]", "xpath:link"],
+        ["xpath=//a[@onclick=\"mojarra.jsfcljs(document.getElementById('j_idt12'),{'j_idt12:j_idt18':'j_idt12:j_idt18'},'');return false\"]", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt12']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Save')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "475d9584-d1ac-4d92-9e76-29509761c7b8",
+      "comment": "Check Bouncer Created ",
+      "command": "assertText",
+      "target": "css=table:nth-child(1) td",
+      "targets": [
+        ["css=table:nth-child(1) td", "css:finder"],
+        ["xpath=//div[@id='messagePanel']/table/tbody/tr/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'Bouncer was successfully created.')]", "xpath:innerText"]
+      ],
+      "value": "Bouncer was successfully created. "
+    }, {
+      "id": "94876a7d-1f30-4a99-b2c9-5ab9959cc91d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Show All Bouncer Items",
+      "targets": [
+        ["linkText=Show All Bouncer Items", "linkText"],
+        ["css=a:nth-child(8)", "css:finder"],
+        ["xpath=//a[contains(text(),'Show All Bouncer Items')]", "xpath:link"],
+        ["xpath=//a[@onclick=\"mojarra.jsfcljs(document.getElementById('j_idt12'),{'j_idt12:j_idt20':'j_idt12:j_idt20'},'');return false\"]", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt12']/a[2]", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[2]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Show All Bouncer Items')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b6e7b572-8358-4ea0-9130-d55b596b8d4b",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=View",
+      "targets": [
+        ["linkText=View", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'View')]", "xpath:link"],
+        ["xpath=//a[@onclick=\"mojarra.jsfcljs(document.getElementById('j_idt11'),{'j_idt11:j_idt21:0:j_idt36':'j_idt11:j_idt21:0:j_idt36'},'');return false\"]", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt11']/table/tbody/tr/td[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'View')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8c931927-a101-401d-a864-ca2b11cfe74e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Show All Bouncer Items",
+      "targets": [
+        ["linkText=Show All Bouncer Items", "linkText"],
+        ["css=a:nth-child(12)", "css:finder"],
+        ["xpath=//a[contains(text(),'Show All Bouncer Items')]", "xpath:link"],
+        ["xpath=//a[@onclick=\"mojarra.jsfcljs(document.getElementById('j_idt12'),{'j_idt12:j_idt29':'j_idt12:j_idt29'},'');return false\"]", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt12']/a[4]", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[3]", "xpath:href"],
+        ["xpath=//a[4]", "xpath:position"],
+        ["xpath=//a[contains(.,'Show All Bouncer Items')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "5a4dc89f-e82b-4f79-b09b-506378e72cb9",
+    "name": "testDestroy",
+    "commands": [{
+      "id": "20a5a47a-f5b9-454b-addf-289fccbe954e",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/bouncer-fearnall/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4a9b6ffa-629b-421c-a426-723be100d906",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1064x833",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "dae61f4d-4fc9-48da-a6df-54ad9f666a83",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Show All Bouncer Items",
+      "targets": [
+        ["linkText=Show All Bouncer Items", "linkText"],
+        ["css=a", "css:finder"],
+        ["xpath=//a[contains(text(),'Show All Bouncer Items')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/bouncer-fearnall/faces/bouncer/List.xhtml')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Show All Bouncer Items')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d59a39a7-9ee1-4d99-9992-17ffa3f3d6fb",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Destroy",
+      "targets": [
+        ["linkText=Destroy", "linkText"],
+        ["css=a:nth-child(4)", "css:finder"],
+        ["xpath=//a[contains(text(),'Destroy')]", "xpath:link"],
+        ["xpath=//a[@onclick=\"mojarra.jsfcljs(document.getElementById('j_idt11'),{'j_idt11:j_idt21:0:j_idt40':'j_idt11:j_idt21:0:j_idt40'},'');return false\"]", "xpath:attributes"],
+        ["xpath=//form[@id='j_idt11']/table/tbody/tr/td[5]/a[3]", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[3]", "xpath:href"],
+        ["xpath=//a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,'Destroy')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fa6a20d2-7d6c-4712-a97a-aead7c3eca5a",
+      "comment": "",
+      "command": "click",
+      "target": "css=tbody:nth-child(1) td",
+      "targets": [
+        ["css=tbody:nth-child(1) td", "css:finder"],
+        ["xpath=//div[@id='j_idt11:messagePanel']/table/tbody/tr/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'Bouncer was successfully deleted.')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ab54d9ab-7bc3-4436-8727-2ad0eb2f778c",
+      "comment": "",
+      "command": "click",
+      "target": "css=tbody:nth-child(1) td",
+      "targets": [
+        ["css=tbody:nth-child(1) td", "css:finder"],
+        ["xpath=//div[@id='j_idt11:messagePanel']/table/tbody/tr/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'Bouncer was successfully deleted.')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c07882cc-33f4-4ea3-9666-dea30c0a1f12",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=tbody:nth-child(1) td",
+      "targets": [
+        ["css=tbody:nth-child(1) td", "css:finder"],
+        ["xpath=//div[@id='j_idt11:messagePanel']/table/tbody/tr/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'Bouncer was successfully deleted.')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4a6894df-a1b7-4d7e-b9a5-3d623cacbbd8",
+      "comment": "",
+      "command": "click",
+      "target": "css=tbody:nth-child(1) td",
+      "targets": [
+        ["css=tbody:nth-child(1) td", "css:finder"],
+        ["xpath=//div[@id='j_idt11:messagePanel']/table/tbody/tr/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'Bouncer was successfully deleted.')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "02dd7552-1dd9-4a24-ad17-3f9bedb40f97",
+      "comment": "Bouncer was successfully deleted. ",
+      "command": "assertText",
+      "target": "css=tbody:nth-child(1) td",
+      "targets": [
+        ["css=tbody:nth-child(1) td", "css:finder"],
+        ["xpath=//div[@id='j_idt11:messagePanel']/table/tbody/tr/td", "xpath:idRelative"],
+        ["xpath=//td", "xpath:position"],
+        ["xpath=//td[contains(.,'Bouncer was successfully deleted.')]", "xpath:innerText"]
+      ],
+      "value": "Bouncer was successfully deleted. "
+    }]
+  }],
+  "suites": [{
+    "id": "72e930c4-9c11-4083-9d87-d26b8f7c18b2",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["32fa8e73-f6cf-494d-99a0-f70de055938b"]
+  }],
+  "urls": ["http://localhost:8080/", "http://localhost:8080/bouncer-fearnall/"],
+  "plugins": []
+}
