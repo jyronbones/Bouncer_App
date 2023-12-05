@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -11,7 +10,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
+import org.json.JSONArray;
+import org.json.JSONObject;
 /**
  * A class that contains all necessary components for running a swing app that
  * displays all bouncers in a local database. App can also update bouncer values
@@ -107,46 +107,41 @@ public class BouncerInteractionApp extends JFrame {
      * the json and converts to a readable string format. Attributes are then
      * parsed as well and added to the table row by row.
      */
-    private void displayBouncers() {
-        try {
-            URL url = new URL(urlString);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
+private void displayBouncers() {
+    try {
+        URL url = new URL(urlString);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
 
-            StringBuilder response;
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-                response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
+        StringBuilder response;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+            response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
             }
-
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(new InputSource(new StringReader(response.toString())));
-
-            NodeList bouncers = doc.getElementsByTagName("bouncer");
-
-            DefaultTableModel model = (DefaultTableModel) bouncersTable.getModel();
-            model.setRowCount(0);
-
-            for (int i = 0; i < bouncers.getLength(); i++) {
-                Node bouncerNode = bouncers.item(i);
-                if (bouncerNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element bouncerElement = (Element) bouncerNode;
-
-                    String id = bouncerElement.getElementsByTagName("id").item(0).getTextContent();
-                    String x = bouncerElement.getElementsByTagName("x").item(0).getTextContent();
-                    String y = bouncerElement.getElementsByTagName("y").item(0).getTextContent();
-                    String yVelocity = bouncerElement.getElementsByTagName("YVelocity").item(0).getTextContent();
-
-                    model.addRow(new Object[]{id, x, y, yVelocity});
-                }
-            }
-        } catch (IOException | ParserConfigurationException | DOMException | SAXException e) {
         }
+
+        // Parse the JSON response
+        JSONArray bouncersArray = new JSONArray(response.toString());
+
+        DefaultTableModel model = (DefaultTableModel) bouncersTable.getModel();
+        model.setRowCount(0);
+
+        for (int i = 0; i < bouncersArray.length(); i++) {
+            JSONObject bouncer = bouncersArray.getJSONObject(i);
+
+            int id = bouncer.getInt("id");
+            int x = bouncer.getInt("x");
+            int y = bouncer.getInt("y");
+            int yVelocity = bouncer.getInt("YVelocity");
+
+            model.addRow(new Object[]{id, x, y, yVelocity});
+        }
+    } catch (IOException e) {
+        e.printStackTrace(); // Handle the exception appropriately
     }
+}
 
     /**
      * Update a selected bouncer that has been clicked on by the user. This will
