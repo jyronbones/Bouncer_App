@@ -114,10 +114,13 @@ public class BouncerController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BouncerCreated"));
+            // get success message from resource bundle localized for the current locale
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle", locale).getString("BouncerCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            // get error message from resource bundle localized for the current locale
+            JsfUtil.addErrorMessage(e,
+                    ResourceBundle.getBundle("/Bundle", locale).getString("PersistenceErrorOccured"));
             return null;
         }
     }
