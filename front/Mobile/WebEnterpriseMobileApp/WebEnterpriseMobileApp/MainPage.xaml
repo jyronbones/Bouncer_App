@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WebEnterpriseMobileApp.MainPage">
+
+    <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="BouncerBeans" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Button Text="Get Bouncers" Clicked="Button_Clicked" />
+        <Grid Padding="10" RowDefinitions="Auto, *" ColumnDefinitions="Auto, *" MinimumHeightRequest="20">
+            <Label Grid.Row="1"  Grid.Column="1" Text="ID" FontAttributes="Bold" />
+            <Label Grid.Row="1" Grid.Column="2" Text="X POSITION" FontAttributes="Bold" />
+            <Label Grid.Row="1" Grid.Column="3" Text="Y POSITION" FontAttributes="Bold" />
+            <Label Grid.Row="1" Grid.Column="4" Text="Y VELOCITY" FontAttributes="Bold" />
+        </Grid>
+        <BoxView BackgroundColor="White" HeightRequest="3"></BoxView>
+        <!--Collection with a data template for the bouncer object. Data set in code-behind-->
+        <CollectionView x:Name="bouncers">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" RowDefinitions="Auto, *" ColumnDefinitions="Auto, *">
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Id}" FontAttributes="Bold" />
+                        <Label Grid.Row="1" Grid.Column="2" Text="{Binding X}" FontAttributes="Bold" />
+                        <Label Grid.Row="1" Grid.Column="3" Text="{Binding Y}" FontAttributes="Bold" />
+                        <Label Grid.Row="1" Grid.Column="4" Text="{Binding YVelocity}" FontAttributes="Bold" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+
+</ContentPage>
