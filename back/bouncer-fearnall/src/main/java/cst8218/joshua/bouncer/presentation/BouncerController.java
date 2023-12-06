@@ -6,7 +6,10 @@ import cst8218.joshua.bouncer.business.BouncerFacade;
 import cst8218.joshua.bouncer.entity.Bouncer;
 
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.ResourceBundle;
+
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -40,6 +43,26 @@ public class BouncerController implements Serializable {
     public BouncerController() {
     }
 
+    private Locale locale;
+
+    @PostConstruct
+    public void init() {
+        locale = FacesContext.getCurrentInstance().getExternalContext().getRequestLocale();
+    }
+
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public String getLanguage() {
+        return locale.getLanguage();
+    }
+
+    public void setLanguage(String language) {
+        locale = new Locale(language);
+        FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+    }
+
     public Bouncer getSelected() {
         if (current == null) {
             current = new Bouncer();
@@ -63,7 +86,8 @@ public class BouncerController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade()
+                            .findRange(new int[] { getPageFirstItem(), getPageFirstItem() + getPageSize() }));
                 }
             };
         }
@@ -90,10 +114,13 @@ public class BouncerController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BouncerCreated"));
+            // get success message from resource bundle localized for the current locale
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle", locale).getString("BouncerCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            // get error message from resource bundle localized for the current locale
+            JsfUtil.addErrorMessage(e,
+                    ResourceBundle.getBundle("/Bundle", locale).getString("PersistenceErrorOccured"));
             return null;
         }
     }
@@ -157,7 +184,7 @@ public class BouncerController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[] { selectedItemIndex, selectedItemIndex + 1 }).get(0);
         }
     }
 
@@ -208,8 +235,8 @@ public class BouncerController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            BouncerController controller = (BouncerController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "bouncerController");
+            BouncerController controller = (BouncerController) facesContext.getApplication().getELResolver()
+                    .getValue(facesContext.getELContext(), null, "bouncerController");
             return controller.getBouncer(getKey(value));
         }
 
@@ -234,9 +261,10 @@ public class BouncerController implements Serializable {
                 Bouncer o = (Bouncer) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Bouncer.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName()
+                        + "; expected type: " + Bouncer.class.getName());
             }
-        }
+        }// end getAsString
 
     }
 
