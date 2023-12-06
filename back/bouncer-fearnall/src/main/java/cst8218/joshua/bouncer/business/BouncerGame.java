@@ -5,6 +5,7 @@
  */
 package cst8218.joshua.bouncer.business;
 
+import cst8218.joshua.bouncer.entity.AppUser;
 import cst8218.joshua.bouncer.entity.Bouncer;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -23,35 +24,32 @@ import javax.ejb.Startup;
 @Singleton
 public class BouncerGame {
     private final float CHANGE_RATE = 1;
+
     @EJB
     private cst8218.joshua.bouncer.business.BouncerFacade bouncerFacade;
+
+    @EJB
+    private cst8218.joshua.bouncer.business.AppUserFacade userFacade;
+
     private List<Bouncer> bouncers;
-    
+
+
     /**
-     * Game loop method. Calls the advance one frame method on all bouncer
+     * Game loop method. Calls the advance one frame method on all bouncers,
      * updating their positions in the database.
      */
-    @PostConstruct
-    public void go() {
+    private void go() {
         new Thread(new Runnable() {
             public void run() {
-                // the game runs indefinitely
-                while (true) 
-                {
-                    //update all the bouncers and save changes to the database
+                while (true) {
                     bouncers = bouncerFacade.findAll();
-                    for (Bouncer bouncer : bouncers) 
-                    {
+                    for (Bouncer bouncer : bouncers) {
                         bouncer.advanceOneFrame();
                         bouncerFacade.edit(bouncer);
                     }
-                    //sleep while waiting to process the next frame of the animation
-                    try 
-                    {
-                        // wake up roughly CHANGE_RATE times per second
-                        Thread.sleep((long)(1.0/CHANGE_RATE*1000)); 
-                    } catch (InterruptedException exception) 
-                    {
+                    try {
+                        Thread.sleep((long)(1.0 / CHANGE_RATE * 1000));
+                    } catch (InterruptedException exception) {
                         exception.printStackTrace();
                     }
                 }
