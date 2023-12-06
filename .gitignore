@@ -89,6 +89,11 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
-
-# Visual Studio 2015/2017 cache/options directory
+bin
+obj
+.vs
 .vs/
+
+
+
+
