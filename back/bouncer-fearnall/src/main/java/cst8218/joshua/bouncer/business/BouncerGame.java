@@ -38,6 +38,7 @@ public class BouncerGame {
      * Game loop method. Calls the advance one frame method on all bouncers,
      * updating their positions in the database.
      */
+    @PostConstruct
     private void go() {
         new Thread(new Runnable() {
             public void run() {

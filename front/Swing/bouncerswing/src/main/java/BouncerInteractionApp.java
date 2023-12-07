@@ -4,14 +4,9 @@ import java.io.*;
 import java.net.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.*;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 /**
  * A class that contains all necessary components for running a swing app that
  * displays all bouncers in a local database. App can also update bouncer values
@@ -21,21 +16,27 @@ import org.json.JSONObject;
  */
 public class BouncerInteractionApp extends JFrame {
 
-    private JTable bouncersTable;             //used to display all bouncers in database  
-    private final JButton updateButton;       //update a selected bouncer
-    private final JButton refreshButton;      //refreshes bouncer list
-    private int selectedBouncerId = -1;       //user selected bouncer ID
+    private JTable bouncersTable;             // used to display all bouncers in database  
+    private final JButton updateButton;       // update a selected bouncer
+    private final JButton refreshButton;      // refreshes bouncer list
+    private int selectedBouncerId = -1;       // user-selected bouncer ID
     private final int maxY = 600;             // max Y value for a bouncer location
     private final int minY = 0;               // min Y value for a bouncer location
     private final int maxX = 800;             // max X value for a bouncer location
     private final int minX = 0;               // min X value for a bouncer location
-    private final String urlString = "http://localhost:8080/bouncer-fearnall/resources/bouncer/"; //url string used for GET and PUT requests on bouncers
+    private final String urlString = "http://localhost:8080/bouncer-fearnall/resources/bouncer/";
+    private String username;                  // store entered username
+    private String password;                  // store entered password
 
     /**
-     * Constructor for setting up jframe,UI components listeners, and calling
-     * the displaybouncer() function upon app startup
+     * Constructor for setting up JFrame, UI components, listeners, and calling
+     * the displayBouncers() function upon app startup
      */
     public BouncerInteractionApp() {
+        // Display login screen
+        showLoginScreen();
+
+        // Setup the main UI after successful login
         setTitle("CST8218 Java Swing Bouncers A2");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 400);
@@ -56,7 +57,7 @@ public class BouncerInteractionApp extends JFrame {
         titleLabel.setForeground(Color.WHITE);
         panel.add(titleLabel, BorderLayout.NORTH);
 
-        //Table for displaying bouncers and their attributes
+        // Table for displaying bouncers and their attributes
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
         model.addColumn("X");
@@ -103,50 +104,55 @@ public class BouncerInteractionApp extends JFrame {
 
     /**
      * Function for displaying all bouncers. Uses a simple GET request to
-     * retrieve all bouncer entities in a json file. A DocumentBuilder parses
-     * the json and converts to a readable string format. Attributes are then
+     * retrieve all bouncer entities in a JSON file. A DocumentBuilder parses
+     * the JSON and converts it to a readable string format. Attributes are then
      * parsed as well and added to the table row by row.
      */
-private void displayBouncers() {
-    try {
-        URL url = new URL(urlString);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
+    private void displayBouncers() {
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            
+            // Set basic authentication
+            String userCredentials = username + ":" + password;
+            String basicAuth = "Basic " + new String(java.util.Base64.getEncoder().encode(userCredentials.getBytes()));
+            conn.setRequestProperty("Authorization", basicAuth);
 
-        StringBuilder response;
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-            response = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
+            StringBuilder response;
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
             }
+
+            // Parse the JSON response
+            JSONArray bouncersArray = new JSONArray(response.toString());
+
+            DefaultTableModel model = (DefaultTableModel) bouncersTable.getModel();
+            model.setRowCount(0);
+
+            for (int i = 0; i < bouncersArray.length(); i++) {
+                JSONObject bouncer = bouncersArray.getJSONObject(i);
+
+                int id = bouncer.getInt("id");
+                int x = bouncer.getInt("x");
+                int y = bouncer.getInt("y");
+                int yVelocity = bouncer.getInt("YVelocity");
+
+                model.addRow(new Object[]{id, x, y, yVelocity});
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
         }
-
-        // Parse the JSON response
-        JSONArray bouncersArray = new JSONArray(response.toString());
-
-        DefaultTableModel model = (DefaultTableModel) bouncersTable.getModel();
-        model.setRowCount(0);
-
-        for (int i = 0; i < bouncersArray.length(); i++) {
-            JSONObject bouncer = bouncersArray.getJSONObject(i);
-
-            int id = bouncer.getInt("id");
-            int x = bouncer.getInt("x");
-            int y = bouncer.getInt("y");
-            int yVelocity = bouncer.getInt("YVelocity");
-
-            model.addRow(new Object[]{id, x, y, yVelocity});
-        }
-    } catch (IOException e) {
-        e.printStackTrace(); // Handle the exception appropriately
     }
-}
 
     /**
      * Update a selected bouncer that has been clicked on by the user. This will
-     * prompt 3 pop-up windows were a user can enter in a new X, Y and yVelocity
-     * value for the bouncer. These are then converted to json and sent to the
+     * prompt three pop-up windows where a user can enter a new X, Y, and yVelocity
+     * value for the bouncer. These are then converted to JSON and sent to the
      * bouncer app in the form of a PUT request. A validate function is called
      * on each entry to ensure it is an integer and in a valid range.
      */
@@ -162,6 +168,12 @@ private void displayBouncers() {
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("PUT");
                     conn.setRequestProperty("Content-Type", "application/json");
+                    
+                    // Set basic authentication
+                    String userCredentials = username + ":" + password;
+                    String basicAuth = "Basic " + new String(java.util.Base64.getEncoder().encode(userCredentials.getBytes()));
+                    conn.setRequestProperty("Authorization", basicAuth);
+                    
                     conn.setDoOutput(true);
                     String jsonInputString = "{\"id\": \"" + selectedBouncerId + "\", \"x\": \"" + newXValue + "\", \"y\": \"" + newYValue + "\", \"YVelocity\": \"" + newYVelocityValue + "\"}";
 
@@ -180,7 +192,8 @@ private void displayBouncers() {
                     }
                     JOptionPane.showMessageDialog(this, "BOUNCER " + selectedBouncerId + " UPDATED!");
                 }
-            } catch (HeadlessException | IOException e) {
+            } catch (IOException e) {
+                e.printStackTrace(); // Handle the exception appropriately
             }
         } else {
             JOptionPane.showMessageDialog(this, "Please select a bouncer first.");
@@ -199,8 +212,8 @@ private void displayBouncers() {
      * bouncer attributes are integers. Also, in the case of X and Y values,
      * that they fall within the valid range.
      *
-     * @param message value entered by user for attribute
-     * @param attribute attribute being modified, either X,Y or yVelocity
+     * @param message   value entered by the user for attribute
+     * @param attribute attribute being modified, either X, Y, or yVelocity
      * @return input returns the value the user entered if it is valid
      */
     private String validateInput(String message, String attribute) {
@@ -245,7 +258,33 @@ private void displayBouncers() {
     }
 
     /**
-     * main method that starts the application and sets the app to visible
+     * Shows the login screen to get the username and password
+     */
+    private void showLoginScreen() {
+        JPanel loginPanel = new JPanel(new GridLayout(3, 2));
+        JLabel usernameLabel = new JLabel("Username:");
+        JLabel passwordLabel = new JLabel("Password:");
+        JTextField usernameField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
+        loginPanel.add(usernameLabel);
+        loginPanel.add(usernameField);
+        loginPanel.add(passwordLabel);
+        loginPanel.add(passwordField);
+        int loginResult = JOptionPane.showConfirmDialog(this, loginPanel, "Login", JOptionPane.OK_CANCEL_OPTION);
+
+        if (loginResult != JOptionPane.OK_OPTION) {
+            // User canceled the login
+            System.exit(0);
+        }
+
+        // Set the entered credentials
+        username = usernameField.getText();
+        char[] passwordChars = passwordField.getPassword();
+        password = new String(passwordChars);
+    }
+
+    /**
+     * Main method that starts the application and sets the app to visible
      *
      * @param args
      */

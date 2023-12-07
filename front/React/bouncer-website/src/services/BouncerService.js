@@ -8,10 +8,15 @@ const API_BASE_URL = "http://localhost:8080/bouncer-fearnall/resources/bouncer";
  */
 export const getBouncers = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}`);
+    const response = await fetch(API_BASE_URL, {
+      method: 'GET',
+      credentials: 'include', // Include credentials in the request
+    });
+
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
+
     return await response.json();
   } catch (error) {
     console.error("Error fetching bouncers:", error);
@@ -28,12 +33,13 @@ export const getBouncers = async () => {
  */
 export const createBouncer = async (bouncerData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}`, {
+    const response = await fetch(API_BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(bouncerData),
+      credentials: 'include', // Include credentials in the request
     });
 
     if (!response.ok) {
@@ -70,10 +76,13 @@ export const updateBouncer = async (id, bouncerData) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(bouncerData),
+      credentials: 'include', // Include credentials in the request
     });
+
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
+
     return await response.json();
   } catch (error) {
     console.error("Error updating bouncer:", error);
@@ -92,6 +101,7 @@ export const deleteBouncer = async (id) => {
   try {
     const response = await fetch(`${API_BASE_URL}/${id}`, {
       method: "DELETE",
+      credentials: 'include', // Include credentials in the request
     });
 
     if (!response.ok) {

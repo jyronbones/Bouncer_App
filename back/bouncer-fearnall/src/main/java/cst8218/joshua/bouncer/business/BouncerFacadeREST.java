@@ -52,7 +52,6 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @RolesAllowed({"Admin", "ApiGroup"}) // Specifies security roles: Admin, ApiGroup
     public Response createBouncer(Bouncer entity) {
         // for a non-null ID
@@ -95,7 +94,6 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @RolesAllowed({"Admin", "ApiGroup"})
     public Response edit(@PathParam("id") Long id, Bouncer entity) {
         // if the ID doesn't exist
@@ -147,7 +145,6 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @RolesAllowed({"Admin", "ApiGroup"})
     public Response replace(@PathParam("id") Long id, Bouncer entity) {
         // if the ID doesn't exist
@@ -228,7 +225,6 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @RolesAllowed({"Admin", "ApiGroup"})
     public Bouncer find(@PathParam("id") Long id) {
         return super.find(id);
@@ -237,7 +233,6 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @GET
     @Override
     @Produces(MediaType.APPLICATION_JSON)
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @RolesAllowed({"Admin", "ApiGroup"})
     public List<Bouncer> findAll() {
         return super.findAll();
@@ -246,7 +241,6 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @GET
     @Path("{from}/{to}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @RolesAllowed({"Admin", "ApiGroup"})
     public List<Bouncer> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
