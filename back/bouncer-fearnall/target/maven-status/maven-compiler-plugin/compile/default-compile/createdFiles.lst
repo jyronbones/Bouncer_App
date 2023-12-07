@@ -1,11 +1,11 @@
+cst8218\joshua\bouncer\business\CORSFilter.class
 cst8218\joshua\bouncer\business\BouncerGame.class
-CORSFilter.class
 cst8218\joshua\bouncer\business\AppUserFacade.class
 cst8218\joshua\bouncer\business\JAXRSConfiguration.class
 cst8218\joshua\bouncer\business\AbstractFacade.class
 cst8218\joshua\bouncer\entity\Bouncer.class
-cst8218\joshua\bouncer\business\BouncerGame$1.class
 cst8218\joshua\bouncer\services\JsfUtil.class
+cst8218\joshua\bouncer\business\UserInitializer.class
 cst8218\joshua\bouncer\presentation\AppUserController$AppUserControllerConverter.class
 cst8218\joshua\bouncer\presentation\BouncerController$1.class
 cst8218\joshua\bouncer\presentation\AppUserController.class
@@ -14,5 +14,6 @@ cst8218\joshua\bouncer\business\BouncerFacade.class
 cst8218\joshua\bouncer\presentation\AppUserController$1.class
 cst8218\joshua\bouncer\presentation\BouncerController.class
 cst8218\joshua\bouncer\business\BouncerFacadeREST.class
+.netbeans_automatic_build
 cst8218\joshua\bouncer\presentation\BouncerController$BouncerControllerConverter.class
 cst8218\joshua\bouncer\services\PaginationHelper.class

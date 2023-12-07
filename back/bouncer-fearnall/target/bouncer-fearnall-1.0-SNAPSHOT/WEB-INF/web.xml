@@ -20,9 +20,9 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
-    </welcome-file-list>
+    </welcome-file-list> 
     
-        <!-- Admin Role Authorization-->
+       <!-- Admin Role Authorization-->
     <security-constraint>
         <display-name>JSF Pages Login</display-name>
         <web-resource-collection>
@@ -32,19 +32,6 @@
         </web-resource-collection>
         <auth-constraint>
             <description>Admin Role Required</description>
-            <role-name>Admin</role-name>
-        </auth-constraint>
-    </security-constraint>
-    
-    <security-constraint>
-        <display-name>RESTful Resources Login</display-name>
-        <web-resource-collection>
-            <web-resource-name>RESTful Resources</web-resource-name>
-            <url-pattern>/resources/bouncer/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <description>ApiGroup or Admin Role Required</description>
-            <role-name>ApiGroup</role-name>
             <role-name>Admin</role-name>
         </auth-constraint>
     </security-constraint>
@@ -61,5 +48,17 @@
             <role-name>PagesGroup</role-name>
         </auth-constraint>
     </security-constraint>
+
+<security-constraint>
+    <web-resource-collection>
+        <web-resource-name>RESTful Resources</web-resource-name>
+        <url-pattern>/bouncer/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>ApiGroup</role-name>
+        <role-name>Admin</role-name>
+    </auth-constraint>
+</security-constraint>
     
-</web-app>
+</web-app> 
+    
