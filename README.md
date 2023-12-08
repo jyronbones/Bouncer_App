@@ -84,6 +84,15 @@ The `front` directory includes:
 ![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/81130f30-62d0-49e9-95d6-b788e3bb1b9d)
 ![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/176da417-7059-498b-83ff-63680988a92a)
 
+## Access Restrictions
+**REST API & Pages Access**: Limited to users in the ApiGroup and Admin groups.
+**Forbidden Access**: Users in the pagesGroup receive a 403 Forbidden response.
+
+**Screenshot**: Below is an example of the 403 Forbidden error displayed when the application is running:
+![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/a64cb2a1-466d-4566-845d-8c02c3e5d86f)
+![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/f5735269-a445-48c1-86fa-06d187195749)
+![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/9d37b6d0-5090-4fd4-b5ce-16b72c8291d1)
+![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/73aa1174-3f5a-44b9-9d0d-91b013a4f594)
 
 
 ## Swing Authentication
