@@ -52,6 +52,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Response createBouncer(Bouncer entity) {
         // for a non-null ID
         if (entity.getId() != null) {
@@ -93,6 +94,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Response edit(@PathParam("id") Long id, Bouncer entity) {
         // if the ID doesn't exist
         Bouncer oldBouncer = super.find(id);
@@ -143,6 +145,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Response replace(@PathParam("id") Long id, Bouncer entity) {
         // if the ID doesn't exist
         Bouncer oldBouncer = super.find(id);
@@ -201,6 +204,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Response remove(@PathParam("id") Long id) {
         Bouncer bouncer = super.find(id);
         
