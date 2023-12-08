@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080/bouncer-fearnall/resources/bouncer";
+const API_BASE_URL = "/bouncer-fearnall/resources/bouncer";
 
 /**
  * Fetches and returns the list of all bouncers from the server.
