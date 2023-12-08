@@ -74,5 +74,44 @@ public class BouncerTest {
         }
     }
 
+
+    /**
+     * Test for X position update in the AdvanceOneFrame method.
+     * @result X position should remain constant as the AdvanceOneFrame method
+     * only updates the Y position and Y velocity.
+     */
+    @Test
+    public void testXPositionUnchangedInAdvanceOneFrame() {
+        // Create a Bouncer object with random values
+        Bouncer bouncer = createRandomBouncer();
+        // Save initial X value
+        Integer initialX = bouncer.getX();
+
+        // Advance one frame
+        bouncer.advanceOneFrame();
+
+        // Test that X position remains unchanged
+        assertEquals(initialX, bouncer.getX(), "X position should remain unchanged after advancing one frame");
+    }
+
+
+    /**
+     * Test for Y position update in the AdvanceOneFrame method.
+     * @result Y position should be updated based on Y velocity.
+     */
+    @Test
+    public void testYPositionUpdatedInAdvanceOneFrame() {
+        // Create a Bouncer object with random values
+        Bouncer bouncer = createRandomBouncer();
+        // Save initial Y value
+        Integer initialY = bouncer.getY();
+
+        // Advance one frame
+        bouncer.advanceOneFrame();
+
+        // Test that Y position is updated and does not equal the initial value
+        assertNotEquals(initialY, bouncer.getY(), "Y position should be updated after advancing one frame");
+    }
+
 }// End of BouncerTest class
 
