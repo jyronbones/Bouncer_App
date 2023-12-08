@@ -8,6 +8,11 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import java.util.List;
 
+/*
+ * Calls go method, which creates a thread that updates all the bouncers.
+ * 
+ * @author Joshua Fearnall
+ */
 @Startup
 @Singleton
 public class BouncerGame {

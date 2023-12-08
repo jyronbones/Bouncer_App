@@ -7,6 +7,10 @@ import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
+/**
+ * Initializes and saves default users during application startup using the AppUserFacade.
+ * Author: Youssef Hamzo
+ */
 @Startup
 @Singleton
 public class UserInitializer {

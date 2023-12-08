@@ -13,8 +13,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
- * @author Think
+ * Facade for managing AppUser entities.
+ * @author Youssef Hamzo
  */
 @Stateless
 public class AppUserFacade extends AbstractFacade<AppUser> {

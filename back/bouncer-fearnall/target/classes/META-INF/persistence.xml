@@ -5,7 +5,7 @@
     <class>cst8218.joshua.bouncer.entity.Bouncer</class>
     <class>cst8218.joshua.bouncer.entity.AppUser</class>
     <properties>
-      <property name="javax.persistence.schema-generation.database.action" value="update"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
       <property name="javax.persistence.jdbc.user" value="app"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>

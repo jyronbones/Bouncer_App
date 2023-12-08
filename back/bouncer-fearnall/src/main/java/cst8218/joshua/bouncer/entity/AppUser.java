@@ -23,7 +23,8 @@ import javax.validation.constraints.NotNull;
 
 
 /**
- *
+ * Entity class representing an application user with properties for user ID, password,
+ * and group name. Passwords are securely hashed using Pbkdf2PasswordHash.
  * @author Admin
  */
 @Entity
@@ -43,41 +44,50 @@ public class AppUser implements Serializable {
     @Column(name = "GROUPNAME")
     private String groupname; 
         
-    public Long getId() {
+    public Long getId() { //getter method for retrieving the unique identifier
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id) { //Setter method for setting the unique identifier.
         this.id = id;
     }
 
-    public String getUserid() {
+    public String getUserid() { //Getter method for retrieving the user ID.
         return userid;
     }
 
-    public void setUserid(String userid) {
+    public void setUserid(String userid) { //Setter method for setting the user ID.
         this.userid = userid;
     }
 
-    public String getPassword() {
+    public String getPassword() { //Getter method for retrieving the hashed password.
         return ""; //dont want to return actual password!!
     }
 
-        public String getGroupname() {
+        public String getGroupname() { //Getter method for retrieving the group name.
         return groupname;
     }
 
-    public void setGroupname(String groupname) {
+    public void setGroupname(String groupname) { //Setter method for setting the group name.
         this.groupname = groupname;
     }
 
-    
+    /**
+     * Setter method for the password property.
+     * Hashes the provided password using Pbkdf2PasswordHash before storing it.
+     * @param password The plain-text password to set.
+     */
+
     public void setPassword(String password) {
             if(password.equals(""))
                 return;
+            
+        // Obtain an instance of Pbkdf2PasswordHash using CDI
         Instance<? extends PasswordHash> instance = CDI.current().select(Pbkdf2PasswordHash.class);
         PasswordHash passwordHash = instance.get();
+        // Initialize the PasswordHash instance
         passwordHash.initialize(new HashMap<String,String>());
+        // Generate and set the hashed password
         String passwordEntry = password; 
         passwordEntry = passwordHash.generate(passwordEntry.toCharArray());      
         this.password = passwordEntry;

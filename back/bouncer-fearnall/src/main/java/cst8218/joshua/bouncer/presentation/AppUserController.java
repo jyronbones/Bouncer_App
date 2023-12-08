@@ -18,6 +18,14 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
+/**
+ * Controller class for AppUser entities.
+ * 
+ * Handles user input and requests, interacts with the model,
+ * and updates the view.
+ * 
+ * @author Youssef Hamzo
+ */
 @Named("appUserController")
 @SessionScoped
 public class AppUserController implements Serializable {
