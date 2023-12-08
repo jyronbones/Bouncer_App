@@ -8,6 +8,8 @@ package cst8218.joshua.bouncer.business;
 import cst8218.joshua.bouncer.business.AbstractFacade;
 import cst8218.joshua.bouncer.entity.Bouncer;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,6 +30,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Joshua Fearnall
  */
+@DeclareRoles({"Admin", "ApiGroup"}) // Specifies security roles: Admin, ApiGroup
 @Stateless
 @Path("bouncer")
 public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
@@ -49,6 +52,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Response createBouncer(Bouncer entity) {
         // for a non-null ID
         if (entity.getId() != null) {
@@ -90,6 +94,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Response edit(@PathParam("id") Long id, Bouncer entity) {
         // if the ID doesn't exist
         Bouncer oldBouncer = super.find(id);
@@ -140,6 +145,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Response replace(@PathParam("id") Long id, Bouncer entity) {
         // if the ID doesn't exist
         Bouncer oldBouncer = super.find(id);
@@ -198,6 +204,7 @@ public class BouncerFacadeREST extends AbstractFacade<Bouncer> {
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Admin", "ApiGroup"})
     public Response remove(@PathParam("id") Long id) {
         Bouncer bouncer = super.find(id);
         
