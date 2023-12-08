@@ -86,7 +86,7 @@ The `front` directory includes:
 
 
 
-## Swing
+## Swing Authentication
 ![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/2420cdf9-43b0-4871-8105-08267e24e3eb)
 
 
