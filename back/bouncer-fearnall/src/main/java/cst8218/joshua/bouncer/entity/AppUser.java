@@ -43,32 +43,61 @@ public class AppUser implements Serializable {
     private String password;  
     @Column(name = "GROUPNAME")
     private String groupname; 
-        
-    public Long getId() { //getter method for retrieving the unique identifier
+    
+    /**
+     * Getter method for retrieving the unique identifier.
+     * @return The unique identifier.
+     */    
+    public Long getId() { 
         return id;
     }
 
-    public void setId(Long id) { //Setter method for setting the unique identifier.
+    /**
+     * Setter method for setting the unique identifier.
+     * @param id The unique identifier to set.
+     */
+    public void setId(Long id) { 
         this.id = id;
     }
 
-    public String getUserid() { //Getter method for retrieving the user ID.
+    /**
+     * Getter method for retrieving the user ID.
+     * @return The user ID.
+     */
+    public String getUserid() { 
         return userid;
     }
 
-    public void setUserid(String userid) { //Setter method for setting the user ID.
+    /**
+     * Setter method for setting the user ID.
+     * @param userid The user ID to set.
+     */
+    public void setUserid(String userid) { 
         this.userid = userid;
     }
 
-    public String getPassword() { //Getter method for retrieving the hashed password.
-        return ""; //dont want to return actual password!!
+    /**
+     * Getter method for retrieving the hashed password.
+     * Note: The actual password is not returned for security reasons.
+     * @return The hashed password.
+     */
+    public String getPassword() { 
+        return ""; 
     }
 
-        public String getGroupname() { //Getter method for retrieving the group name.
+    /**
+     * Getter method for retrieving the group name.
+     * @return The group name.
+     */
+    public String getGroupname() { 
         return groupname;
     }
 
-    public void setGroupname(String groupname) { //Setter method for setting the group name.
+    /**
+     * Setter method for setting the group name.
+     * @param groupname The group name to set.
+     */
+    public void setGroupname(String groupname) { 
         this.groupname = groupname;
     }
 
