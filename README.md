@@ -73,7 +73,8 @@ The `front` directory includes:
 ### Internationalization Preview
 ![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/4443c982-bad1-45f6-8ac2-ac92f8a604e5)
 ![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/4e4467ae-1186-4571-8045-d50e1917224e)
-![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/ef289a1a-7451-43f0-8630-e1b1ac6872ae)
+![image](https://github.com/jyronbones/Bouncer_App/assets/113639491/230c42e6-2f97-4521-9779-c48335b9f0b8)
+
 
 
 
