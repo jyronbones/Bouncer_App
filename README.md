@@ -85,7 +85,7 @@ The `front` directory includes:
 ![image](https://github.com/jyronbones/Bouncer_App/assets/80455013/176da417-7059-498b-83ff-63680988a92a)
 
 ## Access Restrictions
-**REST API & Pages Access**: Limited to users in the ApiGroup and Admin groups.
+**REST API**: Limited to users in the ApiGroup and Admin groups.
 **Forbidden Access**: Users in the pagesGroup receive a 403 Forbidden response.
 
 **Screenshot**: Below is an example of the 403 Forbidden error displayed when the application is running:
